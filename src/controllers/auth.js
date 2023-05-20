@@ -1,5 +1,5 @@
-import ModelUser from "../models/auth";
-import { SigninSchema, SignupSchema } from "../schemas/auth";
+import ModelUser from "../models/auth.js";
+import { SigninSchema, SignupSchema } from "../schemas/auth.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";

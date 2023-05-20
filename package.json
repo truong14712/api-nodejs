@@ -9,6 +9,7 @@
     "build-babel": "babel ./src -d ./build/src",
     "build": "npm run clean && npm run build-babel",
     "production": "npm run build && node ./build/src/app.js",
+    "start":"nodemon --exec ./node_modules/.bin/babel-node ./src/app.js",
     "dev": "vite"
   },
   "author": "",

@@ -1,5 +1,4 @@
 import express from "express";
-import { checkPermission } from "../middlewares/checkPermission";
 import {
   getAllProduct,
   getOneProduct,
@@ -13,7 +12,7 @@ const route = express.Router();
 route.get("/products/search", searchProduct);
 route.get("/products", getAllProduct);
 route.get("/product/:id", getOneProduct);
-route.post("/product/add", checkPermission, addProduct);
-route.delete("/product/delete/:id", checkPermission, deleteProduct);
-route.put("/product/update/:id", checkPermission, updateProduct);
+route.post("/product/add", addProduct);
+route.delete("/product/delete/:id", deleteProduct);
+route.put("/product/update/:id", updateProduct);
 export default route;
