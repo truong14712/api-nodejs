@@ -1,4 +1,4 @@
-import Blogs from "../models/Blogs";
+import Blogs from "../models/Blogs.js";
 import Joi from "joi";
 /* A validation BlogSchema for the data that is being sent to the server. */
 const BlogSchema = Joi.object({

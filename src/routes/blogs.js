@@ -5,7 +5,7 @@ import {
   getOneBlog,
   deleteBlog,
   updateBlog,
-} from "../controllers/blogs";
+} from "../controllers/blogs.js";
 const route = express.Router();
 route.get("", getAllBlog);
 route.get("/:id", getOneBlog);

@@ -6,7 +6,7 @@ import {
   deleteProduct,
   updateProduct,
   searchProduct,
-} from "../controllers/product";
+} from "../controllers/product.js";
 const route = express.Router();
 // /api/products/search?name=<tên sản phẩm>&minPrice=<giá tối thiểu
 route.get("/products/search", searchProduct);
