@@ -13,7 +13,10 @@ app.use(
     origin: "*",
   })
 );
-
+// Page Home
+app.get("/", (req, res) => {
+  res.send("SERVER ON");
+});
 /* A function that connects to the database. */
 ConnectDB();
 // run website
