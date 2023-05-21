@@ -2,7 +2,7 @@
   "name": "node_js",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "index.js",
   "engines": {
     "node": "14.x"
   },
@@ -12,7 +12,7 @@
     "build-babel": "babel ./src -d ./build/src",
     "build": "npm run clean && npm run build-babel",
     "production": "npm run build && node ./build/src/app.js",
-    "start": "nodemon --exec ./node_modules/.bin/babel-node ./src/index.js",
+    "start": "nodemon --exec ./node_modules/.bin/babel-node index.js",
     "dev": "vite"
   },
   "author": "",
