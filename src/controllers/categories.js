@@ -83,6 +83,7 @@ const updateCategory = async (req, res) => {
     await categorySchema.validateAsync(formData);
     console.log(formData);
     const { id } = req.params;
+    console.log(id);
     const data = await ModelCategories.findByIdAndUpdate(id, formData, {
       new: true,
     });
