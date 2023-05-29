@@ -1,11 +1,11 @@
 import ModelProduct from "../models/products.js";
 import ModelCategories from "../models/categories.js";
 import Joi from "joi";
+import fs from "fs";
 const productSchema = Joi.object({
   name: Joi.string().required().min(6),
   price: Joi.number().required(),
   description: Joi.string(),
-  image: Joi.string(),
   categoryId: Joi.string().required(),
 });
 const getAllProduct = async (req, res) => {
@@ -54,17 +54,24 @@ const searchProduct = async (req, res) => {
 const addProduct = async (req, res) => {
   try {
     const formData = req.body;
-    await productSchema.validateAsync(req.body);
-    const newProduct = new ModelProduct(formData);
-    await newProduct.save();
-    await ModelCategories.findByIdAndUpdate(newProduct.categoryId, {
-      $addToSet: {
-        products: newProduct._id,
-      },
-    });
+    console.log(formData);
+    // await productSchema.validateAsync(req.body);
+    fs.renameSync(req.file.path, "../uploads/" + req.file + originalname);
+    console.log(req.file.path)
+    console.log("../uploads/" + req.file.originalname);
+    // const newProduct = new ModelProduct({
+    //   ...formData,
+    //   image: "../uploads/" + req.file.originalname,
+    // });
+    // await newProduct.save();
+    // await ModelCategories.findByIdAndUpdate(newProduct.categoryId, {
+    //   $addToSet: {
+    //     products: newProduct._id,
+    //   },
+    // });
     return res.status(201).send({
       messenger: "Thêm thành công",
-      data: newProduct,
+      // data: newProduct,
     });
   } catch (error) {
     return res.status(500).send({
