@@ -154,4 +154,26 @@ const request_refreshToken = async (req, res) => {
     });
   });
 };
-export { signup, signin, request_refreshToken };
+const updatePassword = async (req, res) => {
+  try {
+    const { oldPassword, newPassword, confirmPassword } = req.body;
+    const user = await ModelUser.findById(req.user.id).select("+password");
+    const isPasswordMatched = await user.comparePassword(oldPassword);
+    if (isPasswordMatched) {
+      return res.status(404).send("Old password is incorrect!");
+    }
+    if (newPassword !== confirmPassword) {
+      return res.status(400).send("Password doesn't matched with each other!");
+    }
+    user.password = newPassword;
+    await user.save();
+    return res.status(200).json({
+      success: true,
+      message: "Password updated successfully!",
+      user,
+    });
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+};
+export { signup, signin, request_refreshToken, updatePassword };

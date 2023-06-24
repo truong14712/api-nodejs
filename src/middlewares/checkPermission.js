@@ -44,11 +44,11 @@ export const checkPermission = async (req, res, next) => {
         });
       }
       // kiểm tra xem user có quyền admin không
-      if (user.role !== "admin") {
-        return res.status(403).json({
-          message: "Bạn không có quyền truy cập tài nguyên!",
-        });
-      }
+      // if (user.role !== "admin") {
+      //   return res.status(403).json({
+      //     message: "Bạn không có quyền truy cập tài nguyên!",
+      //   });
+      // }
       req.user = user;
     });
     // lưu thông tin user vào request để sử dụng cho các middleware khác
@@ -56,4 +56,13 @@ export const checkPermission = async (req, res, next) => {
   } catch (error) {
     res.status(401).json({ message: error.message });
   }
+};
+export const verifyTokenAndAdmin = (req, res, next) => {
+  verifyToken(req, res, () => {
+    if (user.role === "admin") {
+      next();
+    } else {
+      res.status(403).json("You are not alowed to do that!");
+    }
+  });
 };
