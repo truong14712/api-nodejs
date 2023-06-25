@@ -6,12 +6,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 var _express = _interopRequireDefault(require("express"));
-var _auth = require("../controllers/auth.js");
-var _checkPermission = require("../middlewares/checkPermission.js");
+var _order = require("../controllers/order.js");
 var router = _express["default"].Router();
-router.post("/signup", _auth.signup);
-router.post("/signin", _auth.signin);
-router.post("/refresh", _auth.request_refreshToken);
-router.put("/update-user-password", _checkPermission.checkPermission, _auth.updatePassword);
+router.post("/", _order.addOrder);
+router.get("/", _order.getAllOrder);
+router.get("/:id", _order.getOneOrder);
+router.patch("/updateStatus", _order.updateStatus);
 var _default = router;
 exports["default"] = _default;

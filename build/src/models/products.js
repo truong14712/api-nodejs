@@ -21,8 +21,7 @@ var productSchema = new Schema({
   },
   image: {
     type: String,
-    require: true,
-    maxLength: 255
+    require: true
   },
   description: {
     type: String,

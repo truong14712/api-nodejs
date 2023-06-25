@@ -10,11 +10,11 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 var _products = _interopRequireDefault(require("../models/products.js"));
 var _categories = _interopRequireDefault(require("../models/categories.js"));
 var _joi = _interopRequireDefault(require("joi"));
+var _fs = _interopRequireDefault(require("fs"));
 var productSchema = _joi["default"].object({
   name: _joi["default"].string().required().min(6),
   price: _joi["default"].number().required(),
   description: _joi["default"].string(),
-  image: _joi["default"].string(),
   categoryId: _joi["default"].string().required()
 });
 var getAllProduct = /*#__PURE__*/function () {
@@ -94,41 +94,42 @@ var searchProduct = /*#__PURE__*/function () {
 exports.searchProduct = searchProduct;
 var addProduct = /*#__PURE__*/function () {
   var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
-    var formData, newProduct;
+    var formData;
     return _regenerator["default"].wrap(function _callee3$(_context3) {
       while (1) switch (_context3.prev = _context3.next) {
         case 0:
           _context3.prev = 0;
           formData = req.body;
-          _context3.next = 4;
-          return productSchema.validateAsync(req.body);
-        case 4:
-          newProduct = new _products["default"](formData);
-          _context3.next = 7;
-          return newProduct.save();
-        case 7:
-          _context3.next = 9;
-          return _categories["default"].findByIdAndUpdate(newProduct.categoryId, {
-            $addToSet: {
-              products: newProduct._id
-            }
-          });
-        case 9:
+          console.log(formData);
+          // await productSchema.validateAsync(req.body);
+          _fs["default"].renameSync(req.file.path, "../uploads/" + req.file + originalname);
+          console.log(req.file.path);
+          console.log("../uploads/" + req.file.originalname);
+          // const newProduct = new ModelProduct({
+          //   ...formData,
+          //   image: "../uploads/" + req.file.originalname,
+          // });
+          // await newProduct.save();
+          // await ModelCategories.findByIdAndUpdate(newProduct.categoryId, {
+          //   $addToSet: {
+          //     products: newProduct._id,
+          //   },
+          // });
           return _context3.abrupt("return", res.status(201).send({
-            messenger: "Thêm thành công",
-            data: newProduct
+            messenger: "Thêm thành công"
+            // data: newProduct,
           }));
-        case 12:
-          _context3.prev = 12;
+        case 9:
+          _context3.prev = 9;
           _context3.t0 = _context3["catch"](0);
           return _context3.abrupt("return", res.status(500).send({
             messenger: _context3.t0
           }));
-        case 15:
+        case 12:
         case "end":
           return _context3.stop();
       }
-    }, _callee3, null, [[0, 12]]);
+    }, _callee3, null, [[0, 9]]);
   }));
   return function addProduct(_x5, _x6) {
     return _ref3.apply(this, arguments);

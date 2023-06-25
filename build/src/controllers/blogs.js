@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.updateBlog = exports.getOneBlog = exports.getAllBlog = exports.deleteBlog = exports.addBlog = void 0;
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
-var _Blogs = _interopRequireDefault(require("../models/Blogs"));
+var _Blogs = _interopRequireDefault(require("../models/Blogs.js"));
 var _joi = _interopRequireDefault(require("joi"));
 /* A validation BlogSchema for the data that is being sent to the server. */
 var BlogSchema = _joi["default"].object({

@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.checkPermission = void 0;
+exports.verifyTokenAndAdmin = exports.checkPermission = void 0;
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 var _jsonwebtoken = _interopRequireDefault(require("jsonwebtoken"));
@@ -74,16 +74,14 @@ var checkPermission = /*#__PURE__*/function () {
                       message: "Không tìm thấy user"
                     }));
                   case 9:
-                    if (!(user.role !== "admin")) {
-                      _context.next = 11;
-                      break;
-                    }
-                    return _context.abrupt("return", res.status(403).json({
-                      message: "Bạn không có quyền truy cập tài nguyên!"
-                    }));
-                  case 11:
+                    // kiểm tra xem user có quyền admin không
+                    // if (user.role !== "admin") {
+                    //   return res.status(403).json({
+                    //     message: "Bạn không có quyền truy cập tài nguyên!",
+                    //   });
+                    // }
                     req.user = user;
-                  case 12:
+                  case 10:
                   case "end":
                     return _context.stop();
                 }
@@ -115,3 +113,13 @@ var checkPermission = /*#__PURE__*/function () {
   };
 }();
 exports.checkPermission = checkPermission;
+var verifyTokenAndAdmin = function verifyTokenAndAdmin(req, res, next) {
+  verifyToken(req, res, function () {
+    if (user.role === "admin") {
+      next();
+    } else {
+      res.status(403).json("You are not alowed to do that!");
+    }
+  });
+};
+exports.verifyTokenAndAdmin = verifyTokenAndAdmin;

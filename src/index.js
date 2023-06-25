@@ -1,9 +1,9 @@
 import express from "express";
 import dotenv from "dotenv";
-import router from "./src/routes/index.js";
-import ConnectDB from "./src/db.js";
+import router from "./routes/index.js";
+import ConnectDB from "./db.js";
 import cors from "cors";
-// import path from "path";
+import path from "path";
 import bodyParser from "body-parser";
 // import { fileURLToPath } from "url";
 dotenv.config();

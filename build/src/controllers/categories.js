@@ -181,38 +181,39 @@ var updateCategory = /*#__PURE__*/function () {
         case 4:
           console.log(formData);
           id = req.params.id;
-          _context5.next = 8;
+          console.log(id);
+          _context5.next = 9;
           return _categories["default"].findByIdAndUpdate(id, formData, {
             "new": true
           });
-        case 8:
+        case 9:
           data = _context5.sent;
           if (data) {
-            _context5.next = 13;
+            _context5.next = 14;
             break;
           }
           return _context5.abrupt("return", res.status(400).send({
             messenger: "Không tìm thấy danh mục"
           }));
-        case 13:
+        case 14:
           return _context5.abrupt("return", res.status(200).send({
             messenger: "Cập nhật thành công",
             data: formData
           }));
-        case 14:
-          _context5.next = 19;
+        case 15:
+          _context5.next = 20;
           break;
-        case 16:
-          _context5.prev = 16;
+        case 17:
+          _context5.prev = 17;
           _context5.t0 = _context5["catch"](0);
           return _context5.abrupt("return", res.status(500).send({
             messenger: _context5.t0
           }));
-        case 19:
+        case 20:
         case "end":
           return _context5.stop();
       }
-    }, _callee5, null, [[0, 16]]);
+    }, _callee5, null, [[0, 17]]);
   }));
   return function updateCategory(_x9, _x10) {
     return _ref5.apply(this, arguments);

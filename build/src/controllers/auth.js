@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.signup = exports.signin = exports.request_refreshToken = void 0;
+exports.updatePassword = exports.signup = exports.signin = exports.request_refreshToken = void 0;
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 var _auth = _interopRequireDefault(require("../models/auth.js"));
@@ -276,3 +276,55 @@ var request_refreshToken = /*#__PURE__*/function () {
   };
 }();
 exports.request_refreshToken = request_refreshToken;
+var updatePassword = /*#__PURE__*/function () {
+  var _ref5 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(req, res) {
+    var _req$body3, oldPassword, newPassword, confirmPassword, user, isPasswordMatched;
+    return _regenerator["default"].wrap(function _callee5$(_context5) {
+      while (1) switch (_context5.prev = _context5.next) {
+        case 0:
+          _context5.prev = 0;
+          _req$body3 = req.body, oldPassword = _req$body3.oldPassword, newPassword = _req$body3.newPassword, confirmPassword = _req$body3.confirmPassword;
+          _context5.next = 4;
+          return _auth["default"].findById(req.user.id).select("+password");
+        case 4:
+          user = _context5.sent;
+          _context5.next = 7;
+          return user.comparePassword(oldPassword);
+        case 7:
+          isPasswordMatched = _context5.sent;
+          if (!isPasswordMatched) {
+            _context5.next = 10;
+            break;
+          }
+          return _context5.abrupt("return", res.status(404).send("Old password is incorrect!"));
+        case 10:
+          if (!(newPassword !== confirmPassword)) {
+            _context5.next = 12;
+            break;
+          }
+          return _context5.abrupt("return", res.status(400).send("Password doesn't matched with each other!"));
+        case 12:
+          user.password = newPassword;
+          _context5.next = 15;
+          return user.save();
+        case 15:
+          return _context5.abrupt("return", res.status(200).json({
+            success: true,
+            message: "Password updated successfully!",
+            user: user
+          }));
+        case 18:
+          _context5.prev = 18;
+          _context5.t0 = _context5["catch"](0);
+          return _context5.abrupt("return", res.status(500).send(_context5.t0.message));
+        case 21:
+        case "end":
+          return _context5.stop();
+      }
+    }, _callee5, null, [[0, 18]]);
+  }));
+  return function updatePassword(_x9, _x10) {
+    return _ref5.apply(this, arguments);
+  };
+}();
+exports.updatePassword = updatePassword;
