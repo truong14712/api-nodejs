@@ -3,9 +3,9 @@ import dotenv from "dotenv";
 import router from "./src/routes/index.js";
 import ConnectDB from "./src/db.js";
 import cors from "cors";
-import path from "path";
+// import path from "path";
 import bodyParser from "body-parser";
-import { fileURLToPath } from "url";
+// import { fileURLToPath } from "url";
 dotenv.config();
 const app = express();
 const { PORT } = process.env;
@@ -18,10 +18,10 @@ app.use(
   })
 );
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
-app.use("/", express.static(path.join(__dirname, "uploads")));
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
+// app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
+// app.use("/", express.static(path.join(__dirname, "uploads")));
 // Page Home
 app.get("/", (req, res) => {
   res.send("SERVER ON");
